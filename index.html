@@ -1,0 +1,1267 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Falakiyah — Layanan Falak Muhammadiyah</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --hijau-tua:#013220;
+  --hijau:#00693E;
+  --hijau-muda:#E3EEE6;
+  --emas:#B08D57;
+  --emas-terang:#D9C08A;
+  --putih:#FFFFFF;
+  --krem:#F7F9F7;
+  --krem-kartu:#EFF5F0;
+  --tinta:#12241A;
+  --tinta-lembut:#48594E;
+  --garis:#CFE0D5;
+  --radius:14px;
+  --serif:'Amiri', serif;
+  --sans:'Plus Jakarta Sans', sans-serif;
+  --mono:'IBM Plex Mono', monospace;
+}
+*{box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{
+  margin:0;
+  background:var(--krem);
+  color:var(--tinta);
+  font-family:var(--sans);
+  line-height:1.6;
+}
+a{color:inherit;}
+.wrap{max-width:1080px;margin:0 auto;padding:0 24px;}
+
+/* ---------- NAV ---------- */
+header{
+  position:sticky;top:0;z-index:50;
+  background:var(--hijau-tua);
+  border-bottom:3px solid var(--emas);
+}
+.navbar{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:14px 24px;max-width:1080px;margin:0 auto;
+}
+.brand{display:flex;align-items:center;gap:12px;color:var(--krem);text-decoration:none;}
+.brand svg{width:34px;height:34px;flex-shrink:0;}
+.brand-text{display:flex;flex-direction:column;line-height:1.1;}
+.brand-text b{font-family:var(--serif);font-size:1.15rem;letter-spacing:.02em;}
+.brand-text span{font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;color:var(--emas-terang);}
+nav.tabs{display:flex;gap:4px;flex-wrap:wrap;}
+nav.tabs button{
+  background:transparent;border:none;color:#E8F0EA;
+  font-family:var(--sans);font-size:.85rem;font-weight:600;
+  padding:9px 14px;border-radius:8px;cursor:pointer;
+  transition:background .2s ease, color .2s ease;
+  white-space:nowrap;
+}
+nav.tabs button:hover{background:rgba(255,255,255,.08);}
+nav.tabs button.active{background:var(--emas);color:var(--hijau-tua);}
+@media (max-width:860px){
+  .navbar{flex-direction:column;align-items:flex-start;gap:12px;}
+  nav.tabs{width:100%;overflow-x:auto;padding-bottom:4px;}
+}
+
+/* ---------- HERO ---------- */
+.hero{
+  position:relative;overflow:hidden;
+  background:radial-gradient(120% 140% at 15% -10%, #045C36 0%, var(--hijau-tua) 55%, #011F14 100%);
+  color:var(--krem);
+  padding:64px 0 56px;
+}
+
+/* ---------- SUBHERO (banner ringkas untuk tab selain Beranda) ---------- */
+.subhero{
+  display:none;
+  background:linear-gradient(100deg, var(--hijau-tua) 0%, #0A4B31 100%);
+  color:var(--krem);
+  border-bottom:3px solid var(--emas);
+  padding:30px 0;
+}
+.subhero.active{display:block;animation:fadeIn .3s ease;}
+.subhero-inner{display:flex;align-items:center;gap:18px;}
+.subhero-icon{
+  width:54px;height:54px;border-radius:14px;flex-shrink:0;
+  background:rgba(217,192,138,.14);border:1.5px solid rgba(217,192,138,.5);
+  display:flex;align-items:center;justify-content:center;
+}
+.subhero-icon svg{width:28px;height:28px;}
+.subhero .eyebrow{margin:0 0 4px;}
+.subhero h1{font-family:var(--serif);font-size:1.55rem;margin:0;font-weight:700;}
+@media (max-width:600px){
+  .subhero h1{font-size:1.25rem;}
+  .subhero-icon{width:44px;height:44px;}
+  .subhero-icon svg{width:22px;height:22px;}
+}
+.hero-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:40px;align-items:center;}
+@media (max-width:860px){.hero-grid{grid-template-columns:1fr;}}
+.eyebrow{
+  font-family:var(--mono);font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--emas-terang);margin:0 0 14px;
+}
+.hero h1{
+  font-family:var(--serif);font-size:2.6rem;line-height:1.15;margin:0 0 18px;font-weight:700;
+}
+.hero p.lede{font-size:1.02rem;color:#D7E9DE;max-width:46ch;margin:0 0 26px;}
+.hero-actions{display:flex;gap:12px;flex-wrap:wrap;}
+.btn{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:12px 20px;border-radius:9px;font-weight:700;font-size:.9rem;
+  cursor:pointer;border:2px solid transparent;text-decoration:none;
+  transition:transform .15s ease, box-shadow .15s ease;
+}
+.btn:hover{transform:translateY(-1px);}
+.btn-primary{background:var(--emas);color:var(--hijau-tua);}
+.btn-primary:hover{box-shadow:0 6px 18px rgba(199,154,61,.35);}
+.btn-ghost{background:transparent;border-color:rgba(255,255,255,.45);color:var(--krem);}
+.btn-ghost:hover{background:rgba(255,255,255,.08);}
+
+/* astrolabe signature graphic */
+.astrolabe{width:100%;max-width:340px;justify-self:center;}
+.astrolabe svg{width:100%;height:auto;display:block;}
+.ring-slow{animation:spin 90s linear infinite;transform-origin:200px 200px;}
+.ring-rev{animation:spinRev 70s linear infinite;transform-origin:200px 200px;}
+@keyframes spin{from{transform:rotate(0deg);}to{transform:rotate(360deg);}}
+@keyframes spinRev{from{transform:rotate(360deg);}to{transform:rotate(0deg);}}
+@media (prefers-reduced-motion: reduce){.ring-slow,.ring-rev{animation:none;}}
+
+/* ---------- SECTIONS ---------- */
+main{padding:52px 0 90px;}
+.panel{display:none;}
+.panel.active{display:block;animation:fadeIn .35s ease;}
+@keyframes fadeIn{from{opacity:0;transform:translateY(6px);}to{opacity:1;transform:translateY(0);}}
+
+.section-head{margin-bottom:28px;}
+.section-head .eyebrow{color:var(--hijau);}
+.section-head h2{font-family:var(--serif);font-size:1.9rem;margin:2px 0 8px;color:var(--hijau-tua);}
+.section-head p{color:var(--tinta-lembut);max-width:60ch;margin:0;}
+
+.card{
+  background:var(--krem-kartu);border:1px solid var(--garis);border-radius:var(--radius);
+  padding:26px;
+}
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:22px;}
+@media (max-width:760px){.grid-2{grid-template-columns:1fr;}}
+
+label{display:block;font-size:.78rem;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:var(--hijau-tua);margin-bottom:6px;}
+select, input[type=number], input[type=date], input[type=text]{
+  width:100%;padding:11px 12px;border-radius:8px;border:1.5px solid var(--garis);
+  font-family:var(--mono);font-size:.92rem;background:#fff;color:var(--tinta);margin-bottom:16px;
+}
+select:focus, input:focus{outline:2px solid var(--hijau);outline-offset:1px;}
+.field-row{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+@media (max-width:520px){.field-row{grid-template-columns:1fr;}}
+.kota-toggle{
+  background:none;border:none;color:var(--hijau);font-weight:700;font-size:.78rem;
+  cursor:pointer;padding:0;margin:10px 0 4px;text-decoration:underline;
+}
+.kota-toggle:hover{color:var(--hijau-tua);}
+.kota-tambah{
+  display:none;background:var(--putih);border:1px dashed var(--garis);border-radius:10px;
+  padding:14px;margin:8px 0 14px;
+}
+.kota-tambah.open{display:block;animation:fadeIn .2s ease;}
+.kota-tambah .field-row{margin-bottom:10px;}
+.kota-tambah .aksi{display:flex;gap:8px;margin-top:4px;}
+.kota-tambah .aksi button{flex:1;justify-content:center;}
+.kota-pesan{font-size:.78rem;margin-top:8px;}
+.kota-pesan.ok{color:var(--hijau);}
+.kota-pesan.err{color:#b3312c;}
+
+.result-box{
+  background:var(--hijau-tua);color:var(--krem);border-radius:var(--radius);
+  padding:24px;text-align:center;
+}
+.result-box .big{font-family:var(--mono);font-size:2.6rem;font-weight:600;color:var(--emas-terang);line-height:1;}
+.result-box .cap{font-size:.85rem;color:#DCEEE2;margin-top:8px;}
+.note{font-size:.82rem;color:var(--tinta-lembut);margin-top:14px;line-height:1.55;}
+.note b{color:var(--hijau-tua);}
+
+table.times{width:100%;border-collapse:collapse;margin-top:6px;}
+table.times td, table.times th{padding:10px 8px;text-align:left;border-bottom:1px solid var(--garis);}
+table.times th{font-size:.72rem;text-transform:uppercase;letter-spacing:.06em;color:var(--tinta-lembut);}
+table.times td.time{font-family:var(--mono);font-weight:600;color:var(--hijau-tua);font-size:1.05rem;}
+
+.compass-wrap{display:flex;justify-content:center;align-items:center;padding:10px 0 4px;}
+.compass-wrap svg{width:210px;height:210px;}
+#needle{transform-origin:105px 105px;transition:transform .6s cubic-bezier(.2,.9,.3,1.2);}
+
+.edu-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:20px;}
+@media (max-width:760px){.edu-grid{grid-template-columns:1fr;}}
+.edu-card{background:var(--krem-kartu);border:1px solid var(--garis);border-radius:var(--radius);padding:22px;}
+.edu-card .num{font-family:var(--mono);color:var(--emas);font-weight:700;font-size:.8rem;letter-spacing:.08em;}
+.edu-card h3{font-family:var(--serif);color:var(--hijau-tua);margin:6px 0 8px;font-size:1.15rem;}
+.edu-card p{margin:0;color:var(--tinta-lembut);font-size:.93rem;}
+
+.steps{list-style:none;margin:0;padding:0;counter-reset:step;}
+.steps li{
+  counter-increment:step;position:relative;padding:16px 0 16px 46px;border-bottom:1px solid var(--garis);
+}
+.steps li:last-child{border-bottom:none;}
+.steps li::before{
+  content:counter(step);position:absolute;left:0;top:14px;
+  width:30px;height:30px;border-radius:50%;background:var(--hijau);color:#fff;
+  display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-weight:700;font-size:.85rem;
+}
+.steps h4{margin:0 0 4px;font-family:var(--sans);font-weight:700;color:var(--hijau-tua);font-size:.98rem;}
+.steps p{margin:0;color:var(--tinta-lembut);font-size:.9rem;}
+
+.tool-tabs{display:flex;gap:8px;margin-bottom:20px;flex-wrap:wrap;}
+.tool-tabs button{
+  padding:9px 16px;border-radius:20px;border:1.5px solid var(--hijau);background:transparent;
+  color:var(--hijau-tua);font-weight:700;font-size:.82rem;cursor:pointer;
+}
+.tool-tabs button.on{background:var(--hijau);color:#fff;}
+
+.hijri-out{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;justify-content:center;}
+.hijri-out .d{font-family:var(--serif);font-size:2.1rem;color:var(--emas-terang);}
+
+footer{background:var(--hijau-tua);color:#CFE2D6;padding:34px 0;font-size:.85rem;}
+footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;}
+footer b{color:#fff;}
+
+.disclaimer{
+  border-left:4px solid var(--emas);background:#F6F0E2;padding:14px 18px;border-radius:8px;
+  font-size:.86rem;color:#5B4A29;margin-top:18px;
+}
+.info-card{
+  border-left:4px solid var(--hijau);background:var(--hijau-muda);
+  padding:16px 20px;border-radius:8px;margin-bottom:26px;
+}
+.info-card h4{margin:0 0 6px;font-family:var(--serif);color:var(--hijau-tua);font-size:1.02rem;}
+.info-card p{margin:0;color:var(--tinta-lembut);font-size:.9rem;line-height:1.6;}
+
+/* ---------- ASISTEN FALAK (chat widget) ---------- */
+.chat-fab{
+  position:fixed;right:22px;bottom:22px;z-index:80;
+  width:60px;height:60px;border-radius:50%;border:none;cursor:pointer;
+  background:var(--hijau-tua);box-shadow:0 8px 24px rgba(1,50,32,.35);
+  display:flex;align-items:center;justify-content:center;
+  transition:transform .2s ease;
+}
+.chat-fab:hover{transform:scale(1.06);}
+.chat-fab svg{width:28px;height:28px;}
+.chat-fab .dot{
+  position:absolute;top:6px;right:6px;width:11px;height:11px;border-radius:50%;
+  background:var(--emas-terang);border:2px solid var(--hijau-tua);
+}
+.chat-panel{
+  position:fixed;right:22px;bottom:96px;z-index:80;
+  width:360px;max-width:calc(100vw - 32px);height:500px;max-height:70vh;
+  background:#fff;border-radius:16px;overflow:hidden;
+  box-shadow:0 20px 50px rgba(1,50,32,.28);
+  display:none;flex-direction:column;border:1px solid var(--garis);
+}
+.chat-panel.open{display:flex;animation:fadeIn .25s ease;}
+.chat-head{
+  background:var(--hijau-tua);color:#fff;padding:14px 16px;
+  display:flex;align-items:center;gap:10px;flex-shrink:0;
+}
+.chat-head svg{width:26px;height:26px;flex-shrink:0;}
+.chat-head .ttl{flex:1;line-height:1.15;}
+.chat-head .ttl b{display:block;font-size:.94rem;}
+.chat-head .ttl span{font-size:.7rem;color:var(--emas-terang);}
+.chat-head button{background:transparent;border:none;color:#fff;font-size:1.1rem;cursor:pointer;padding:4px 6px;}
+.chat-settings{
+  display:none;background:var(--krem-kartu);border-bottom:1px solid var(--garis);
+  padding:14px 16px;flex-shrink:0;
+}
+.chat-settings.open{display:block;}
+.chat-settings label{font-size:.7rem;margin-bottom:4px;}
+.chat-settings input[type=text]{margin-bottom:10px;padding:8px 10px;font-size:.8rem;}
+.chat-settings .row{display:flex;align-items:center;gap:8px;margin-bottom:10px;}
+.chat-settings .row label{margin:0;text-transform:none;font-weight:600;color:var(--tinta);font-size:.82rem;}
+.chat-settings .stat{font-size:.72rem;padding:4px 0;color:var(--tinta-lembut);}
+.chat-settings .stat.ok{color:var(--hijau);font-weight:700;}
+.chat-settings .stat.off{color:#a15b2a;font-weight:700;}
+.chat-settings button.simpan{
+  width:100%;background:var(--hijau-tua);color:#fff;border:none;border-radius:8px;
+  padding:8px;font-weight:700;font-size:.8rem;cursor:pointer;
+}
+.chat-messages{
+  flex:1;overflow-y:auto;padding:16px;display:flex;flex-direction:column;gap:10px;
+  background:var(--krem);
+}
+.msg{max-width:85%;padding:10px 13px;border-radius:12px;font-size:.88rem;line-height:1.5;}
+.msg.bot{background:var(--krem-kartu);border:1px solid var(--garis);color:var(--tinta);align-self:flex-start;border-bottom-left-radius:3px;}
+.msg.user{background:var(--hijau);color:#fff;align-self:flex-end;border-bottom-right-radius:3px;}
+.chat-suggest{
+  padding:0 14px 10px;display:flex;gap:6px;flex-wrap:wrap;flex-shrink:0;background:var(--krem);
+}
+.chip{
+  background:#fff;border:1.3px solid var(--hijau);color:var(--hijau-tua);
+  font-size:.74rem;font-weight:600;padding:6px 10px;border-radius:20px;cursor:pointer;
+}
+.chip:hover{background:var(--hijau-muda);}
+.chat-input-row{
+  display:flex;gap:8px;padding:12px;border-top:1px solid var(--garis);background:#fff;flex-shrink:0;
+}
+.chat-input-row input{
+  flex:1;border:1.5px solid var(--garis);border-radius:10px;padding:10px 12px;
+  font-family:var(--sans);font-size:.88rem;margin:0;
+}
+.chat-input-row input:focus{outline:2px solid var(--hijau);outline-offset:1px;}
+.chat-input-row button{
+  background:var(--hijau-tua);color:#fff;border:none;border-radius:10px;padding:0 16px;
+  font-weight:700;cursor:pointer;font-size:.85rem;
+}
+@media (max-width:480px){
+  .chat-panel{right:16px;left:16px;width:auto;bottom:88px;}
+  .chat-fab{right:16px;bottom:16px;}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="navbar">
+    <a href="#" class="brand">
+      <svg viewBox="0 0 60 60" fill="none">
+        <circle cx="30" cy="30" r="29" fill="#00693E"/>
+        <circle cx="30" cy="30" r="21" fill="none" stroke="#D9C08A" stroke-width="1.4"/>
+        <circle cx="30" cy="30" r="21" fill="none" stroke="#D9C08A" stroke-width="0.8" stroke-dasharray="1 3"/>
+        <g stroke="#D9C08A" stroke-width="1" opacity="0.55">
+          <line x1="30" y1="9" x2="30" y2="51"/>
+          <line x1="9" y1="30" x2="51" y2="30"/>
+        </g>
+        <path fill="#D9C08A" d="M34.5 20a11 11 0 1 0 0 20 13 13 0 0 1 0-20Z"/>
+        <path fill="#FFFFFF" d="M40.8 25.3 L42.1 28.3 L45.4 28.6 L42.9 30.8 L43.7 34 L40.8 32.3 L37.9 34 L38.7 30.8 L36.2 28.6 L39.5 28.3 Z"/>
+      </svg>
+      <span class="brand-text"><b>Falakiyah</b><span>Layanan Falak Muhammadiyah</span></span>
+    </a>
+    <nav class="tabs" id="tabnav">
+      <button data-tab="beranda" class="active">Beranda</button>
+      <button data-tab="kiblat">Arah Kiblat</button>
+      <button data-tab="salat">Waktu Salat</button>
+      <button data-tab="hijriah">Kalender Hijriah</button>
+      <button data-tab="edukasi">Edukasi Falak</button>
+      <button data-tab="panduan">Panduan Alat</button>
+    </nav>
+  </div>
+</header>
+
+<section class="hero" id="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <p class="eyebrow">Majelis Tarjih &amp; Ilmu Falak</p>
+      <h1>Menghadirkan Ilmu Falak dalam Genggaman Umat</h1>
+      <p class="lede">Satu portal untuk menghitung arah kiblat, memperkirakan waktu salat, mengonversi kalender Hijriah, mempelajari ilmu falak, dan memahami cara memakai alat ukur arah kiblat — dijiwai semangat hisab hakiki Muhammadiyah.</p>
+      <div class="hero-actions">
+        <button class="btn btn-primary" onclick="showTab('kiblat')">Hitung Arah Kiblat</button>
+        <button class="btn btn-ghost" onclick="showTab('edukasi')">Pelajari Ilmu Falak</button>
+      </div>
+    </div>
+    <div class="astrolabe">
+      <svg viewBox="0 0 400 400">
+        <circle cx="200" cy="200" r="150" fill="none" stroke="#D9C08A" stroke-width="1.4" opacity=".55"/>
+        <g class="ring-slow">
+          <circle cx="200" cy="200" r="170" fill="none" stroke="#D9C08A" stroke-width="1" stroke-dasharray="2 6" opacity=".7"/>
+          <g fill="#D9C08A" opacity=".85" font-family="IBM Plex Mono" font-size="11">
+            <text x="196" y="35">N</text><text x="196" y="372">S</text>
+            <text x="30" y="204">B</text><text x="362" y="204">T</text>
+          </g>
+        </g>
+        <g class="ring-rev">
+          <circle cx="200" cy="200" r="120" fill="none" stroke="#D7E9DE" stroke-width="1" opacity=".5"/>
+          <path d="M200 80 A120 120 0 0 1 320 200" fill="none" stroke="#D9C08A" stroke-width="2" opacity=".6"/>
+        </g>
+        <circle cx="200" cy="200" r="86" fill="none" stroke="#D7E9DE" stroke-width="1" opacity=".4"/>
+        <g transform="translate(90,90) scale(0.5)">
+          <path fill="#D9C08A" d="M102.2 54.5 L110.0 10.0 L117.8 54.5 Z M131.0 58.1 L160.0 23.4 L144.5 65.9 Z M154.1 75.5 L196.6 60.0 L161.9 89.0 Z M165.5 102.2 L210.0 110.0 L165.5 117.8 Z M161.9 131.0 L196.6 160.0 L154.1 144.5 Z M144.5 154.1 L160.0 196.6 L131.0 161.9 Z M117.8 165.5 L110.0 210.0 L102.2 165.5 Z M89.0 161.9 L60.0 196.6 L75.5 154.1 Z M65.9 144.5 L23.4 160.0 L58.1 131.0 Z M54.5 117.8 L10.0 110.0 L54.5 102.2 Z M58.1 89.0 L23.4 60.0 L65.9 75.5 Z M75.5 65.9 L60.0 23.4 L89.0 58.1 Z"/>
+          <circle cx="110" cy="110" r="34" fill="#013220" stroke="#D9C08A" stroke-width="2.5"/>
+        </g>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<section class="subhero" id="subhero">
+  <div class="wrap subhero-inner">
+    <div class="subhero-icon" id="subheroIcon"></div>
+    <div>
+      <p class="eyebrow" id="subheroEyebrow"></p>
+      <h1 id="subheroTitle"></h1>
+    </div>
+  </div>
+</section>
+
+<main class="wrap">
+
+  <!-- BERANDA -->
+  <div class="panel active" id="beranda">
+    <div class="section-head">
+      <p class="eyebrow">Tentang Layanan</p>
+      <h2>Empat Layanan, Satu Tujuan</h2>
+      <p>Falakiyah dibangun sebagai media dakwah digital yang memudahkan warga Muhammadiyah dan masyarakat umum mempraktikkan ilmu falak dalam kehidupan sehari-hari.</p>
+    </div>
+    <div class="edu-grid">
+      <div class="edu-card">
+        <span class="num">01</span>
+        <h3>Arah Kiblat</h3>
+        <p>Hitung sudut kiblat dari koordinat lokasi mana pun menggunakan rumus bearing lingkaran besar menuju Ka'bah.</p>
+      </div>
+      <div class="edu-card">
+        <span class="num">02</span>
+        <h3>Waktu Salat</h3>
+        <p>Perkiraan waktu Subuh hingga Isya berdasarkan posisi matahari, lintang, dan bujur lokasi.</p>
+      </div>
+      <div class="edu-card">
+        <span class="num">03</span>
+        <h3>Kalender Hijriah</h3>
+        <p>Konversi tanggal Masehi ke Hijriah dan sebaliknya menggunakan perhitungan kalender tabular.</p>
+      </div>
+      <div class="edu-card">
+        <span class="num">04</span>
+        <h3>Edukasi &amp; Panduan Alat</h3>
+        <p>Materi dasar ilmu falak serta tuntunan praktis memakai kompas, tongkat istiwa, dan aplikasi rasydul kiblat.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ARAH KIBLAT -->
+  <div class="panel" id="kiblat">
+    <div class="section-head">
+      <p>Pilih kota atau masukkan koordinat lokasi Anda. Perhitungan memakai rumus <i>initial bearing</i> lingkaran besar menuju Ka'bah (21.4225° LU, 39.8262° BT).</p>
+    </div>
+    <div class="info-card">
+      <h4>Apa itu penentuan arah kiblat?</h4>
+      <p>Arah kiblat adalah arah menuju Ka'bah di Makkah yang wajib dihadap umat Islam saat salat. Karena permukaan bumi melengkung, arah ini dihitung dengan geodesi bola (bukan garis lurus di peta datar), sehingga di sebagian besar wilayah Indonesia arah kiblat condong ke arah barat laut, bukan tepat ke barat. Semakin presisi lintang dan bujur lokasi yang dimasukkan, semakin akurat pula sudut kiblat yang dihasilkan.</p>
+      <p style="margin-top:10px">Angka derajat yang muncul dihitung searah jarum jam dari titik Utara sejati (bukan Utara kompas magnetik). Nilai ini berguna untuk meluruskan shaf masjid/mushola, menentukan arah sajadah di rumah, maupun sebagai acuan sebelum verifikasi lapangan memakai tongkat istiwa.</p>
+    </div>
+    <div class="grid-2">
+      <div class="card">
+        <label for="kotaSelect">Pilih Kota (opsional)</label>
+        <select id="kotaSelect" onchange="isiKota()">
+          <option value="">— Masukkan koordinat manual —</option>
+        </select>
+        <button type="button" class="kota-toggle" onclick="toggleTambahKota('kiblat')">+ Tambah kota / negara baru</button>
+        <div class="kota-tambah" id="kotaTambah_kiblat">
+          <div class="field-row">
+            <div><label for="kbNama_kiblat">Nama Kota</label><input type="text" id="kbNama_kiblat" placeholder="Contoh: Semarang"></div>
+            <div><label for="kbNegara_kiblat">Negara</label><input type="text" id="kbNegara_kiblat" placeholder="Contoh: Indonesia"></div>
+          </div>
+          <div class="field-row">
+            <div><label for="kbLat_kiblat">Lintang</label><input type="number" id="kbLat_kiblat" step="0.0001" placeholder="-6.9667"></div>
+            <div><label for="kbLng_kiblat">Bujur</label><input type="number" id="kbLng_kiblat" step="0.0001" placeholder="110.4167"></div>
+          </div>
+          <div class="aksi">
+            <button type="button" class="btn btn-ghost" style="border-color:var(--garis);color:var(--tinta)" onclick="toggleTambahKota('kiblat')">Batal</button>
+            <button type="button" class="btn btn-primary" onclick="simpanKotaBaru('kiblat')">Simpan Kota</button>
+          </div>
+          <div class="kota-pesan" id="kotaPesan_kiblat"></div>
+        </div>
+        <div class="field-row">
+          <div>
+            <label for="lat">Lintang (Latitude)</label>
+            <input type="number" id="lat" step="0.0001" placeholder="-5.1477">
+          </div>
+          <div>
+            <label for="lng">Bujur (Longitude)</label>
+            <input type="number" id="lng" step="0.0001" placeholder="119.4327">
+          </div>
+        </div>
+        <button class="btn btn-primary" style="width:100%;justify-content:center" onclick="hitungKiblat()">Hitung Arah Kiblat</button>
+        <div class="disclaimer">Hasil bersifat perkiraan berbasis rumus geodesi sederhana (asumsi bumi bulat sempurna). Untuk penentuan resmi masjid/mushola, verifikasi dengan alat ukur seperti tongkat istiwa atau aplikasi rasydul kiblat pada tanggal yang tepat.</div>
+      </div>
+      <div class="card">
+        <div class="compass-wrap">
+          <svg viewBox="0 0 210 210">
+            <circle cx="105" cy="105" r="95" fill="#fff" stroke="#CFE0D5" stroke-width="2"/>
+            <g font-family="IBM Plex Mono" font-size="12" fill="#48594E" text-anchor="middle">
+              <text x="105" y="24">U</text><text x="105" y="196">S</text>
+              <text x="14" y="110">B</text><text x="196" y="110">T</text>
+            </g>
+            <circle cx="105" cy="105" r="95" fill="none" stroke="#00693E" stroke-width="1" stroke-dasharray="1 5"/>
+            <g id="needle">
+              <line x1="105" y1="105" x2="105" y2="28" stroke="#B08D57" stroke-width="4" stroke-linecap="round"/>
+              <polygon points="105,20 99,34 111,34" fill="#B08D57"/>
+              <line x1="105" y1="105" x2="105" y2="150" stroke="#013220" stroke-width="4" stroke-linecap="round"/>
+            </g>
+            <circle cx="105" cy="105" r="5" fill="#013220"/>
+          </svg>
+        </div>
+        <div class="result-box">
+          <div class="big" id="hasilSudut">—</div>
+          <div class="cap">Derajat searah jarum jam dari Utara sejati</div>
+        </div>
+        <div class="note" id="hasilJarak"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- WAKTU SALAT -->
+  <div class="panel" id="salat">
+    <div class="section-head">
+      <p>Perkiraan waktu salat harian berdasarkan posisi matahari, dihitung dari lintang, bujur, dan zona waktu lokasi.</p>
+    </div>
+    <div class="info-card">
+      <h4>Apa dasar perhitungan waktu salat?</h4>
+      <p>Setiap waktu salat berkaitan dengan posisi matahari di langit. Subuh dan Isya ditentukan dari sudut matahari di bawah ufuk (fajar/senja astronomis), Dzuhur saat matahari melintasi meridian lokasi, Ashar dari panjang bayangan benda tegak, serta Maghrib saat matahari terbenam. Karena posisi matahari berubah tiap hari dan tiap lokasi, waktu salat pun berbeda-beda antarkota dan sepanjang tahun.</p>
+      <p style="margin-top:10px">Kalkulator ini memakai sudut baku 18° untuk Subuh dan Isya, serta faktor bayangan 1 (mazhab Syafi'i) untuk Ashar — parameter yang umum dipakai di banyak aplikasi jadwal salat. Lembaga berbeda (Muhammadiyah, Kemenag, organisasi lain) bisa memakai sudut acuan sedikit berbeda, sehingga hasilnya mungkin selisih beberapa menit dari jadwal resmi.</p>
+    </div>
+    <div class="grid-2">
+      <div class="card">
+        <label for="kotaSelect2">Pilih Kota (opsional)</label>
+        <select id="kotaSelect2" onchange="isiKota2()">
+          <option value="">— Masukkan koordinat manual —</option>
+        </select>
+        <button type="button" class="kota-toggle" onclick="toggleTambahKota('salat')">+ Tambah kota / negara baru</button>
+        <div class="kota-tambah" id="kotaTambah_salat">
+          <div class="field-row">
+            <div><label for="kbNama_salat">Nama Kota</label><input type="text" id="kbNama_salat" placeholder="Contoh: Semarang"></div>
+            <div><label for="kbNegara_salat">Negara</label><input type="text" id="kbNegara_salat" placeholder="Contoh: Indonesia"></div>
+          </div>
+          <div class="field-row">
+            <div><label for="kbLat_salat">Lintang</label><input type="number" id="kbLat_salat" step="0.0001" placeholder="-6.9667"></div>
+            <div><label for="kbLng_salat">Bujur</label><input type="number" id="kbLng_salat" step="0.0001" placeholder="110.4167"></div>
+          </div>
+          <div class="field-row">
+            <div><label for="kbTz_salat">Zona Waktu (UTC+, opsional)</label><input type="number" id="kbTz_salat" step="1" placeholder="7"></div>
+          </div>
+          <div class="aksi">
+            <button type="button" class="btn btn-ghost" style="border-color:var(--garis);color:var(--tinta)" onclick="toggleTambahKota('salat')">Batal</button>
+            <button type="button" class="btn btn-primary" onclick="simpanKotaBaru('salat')">Simpan Kota</button>
+          </div>
+          <div class="kota-pesan" id="kotaPesan_salat"></div>
+        </div>
+        <div class="field-row">
+          <div><label for="lat2">Lintang</label><input type="number" id="lat2" step="0.0001" placeholder="-5.1477"></div>
+          <div><label for="lng2">Bujur</label><input type="number" id="lng2" step="0.0001" placeholder="119.4327"></div>
+        </div>
+        <div class="field-row">
+          <div><label for="tz2">Zona Waktu (UTC+)</label><input type="number" id="tz2" step="1" placeholder="8"></div>
+          <div><label for="tgl2">Tanggal</label><input type="date" id="tgl2"></div>
+        </div>
+        <button class="btn btn-primary" style="width:100%;justify-content:center" onclick="hitungSalat()">Hitung Waktu Salat</button>
+        <div class="disclaimer">Perhitungan memakai sudut Subuh &amp; Isya 18° (pendekatan umum). Hasil hanya estimasi untuk pembelajaran — gunakan Jadwal Waktu Salat resmi Muhammadiyah atau Kemenag RI untuk keperluan ibadah.</div>
+      </div>
+      <div class="card">
+        <table class="times">
+          <tr><th>Waktu</th><th style="text-align:right">Jam</th></tr>
+          <tr><td>Imsak</td><td class="time" style="text-align:right" id="t-imsak">—</td></tr>
+          <tr><td>Subuh</td><td class="time" style="text-align:right" id="t-fajr">—</td></tr>
+          <tr><td>Terbit</td><td class="time" style="text-align:right" id="t-sunrise">—</td></tr>
+          <tr><td>Dzuhur</td><td class="time" style="text-align:right" id="t-dhuhr">—</td></tr>
+          <tr><td>Ashar</td><td class="time" style="text-align:right" id="t-asr">—</td></tr>
+          <tr><td>Maghrib</td><td class="time" style="text-align:right" id="t-maghrib">—</td></tr>
+          <tr><td>Isya</td><td class="time" style="text-align:right" id="t-isha">—</td></tr>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- KALENDER HIJRIAH -->
+  <div class="panel" id="hijriah">
+    <div class="section-head">
+      <p>Konversi dua arah antara kalender Masehi dan Hijriah memakai algoritma kalender tabular (aritmatika 30 tahun).</p>
+    </div>
+    <div class="info-card">
+      <h4>Apa itu kalender Hijriah?</h4>
+      <p>Kalender Hijriah (Qamariyah) mengikuti peredaran bulan mengelilingi bumi, berbeda dengan kalender Masehi yang mengikuti peredaran matahari. Satu tahun Hijriah rata-rata berisi 354–355 hari, sekitar 10–11 hari lebih pendek dari tahun Masehi, sehingga bulan-bulan penting seperti Ramadhan dan Dzulhijjah bergeser maju setiap tahunnya jika dibandingkan kalender Masehi.</p>
+      <p style="margin-top:10px">Penanggalan ini dimulai sejak peristiwa hijrah Nabi Muhammad ﷺ dari Makkah ke Madinah pada tahun 622 Masehi, yang ditetapkan sebagai tahun 1 Hijriah. Kalender tabular yang dipakai kalkulator ini adalah pendekatan matematis rata-rata; penetapan awal bulan secara resmi tetap merujuk pada hasil hisab hakiki atau rukyat oleh otoritas keagamaan.</p>
+    </div>
+    <div class="tool-tabs">
+      <button class="on" id="btnM2H" onclick="setHijriMode('m2h')">Masehi → Hijriah</button>
+      <button id="btnH2M" onclick="setHijriMode('h2m')">Hijriah → Masehi</button>
+    </div>
+    <div class="grid-2">
+      <div class="card">
+        <div id="modeM2H">
+          <label for="tglMasehi">Tanggal Masehi</label>
+          <input type="date" id="tglMasehi">
+          <button class="btn btn-primary" style="width:100%;justify-content:center" onclick="konversiM2H()">Konversi ke Hijriah</button>
+        </div>
+        <div id="modeH2M" style="display:none">
+          <div class="field-row">
+            <div><label for="hDay">Hari</label><input type="number" id="hDay" min="1" max="30" placeholder="1"></div>
+            <div><label for="hMonth">Bulan</label>
+              <select id="hMonth">
+                <option value="1">Muharram</option><option value="2">Safar</option>
+                <option value="3">Rabiul Awal</option><option value="4">Rabiul Akhir</option>
+                <option value="5">Jumadil Awal</option><option value="6">Jumadil Akhir</option>
+                <option value="7">Rajab</option><option value="8">Sya'ban</option>
+                <option value="9">Ramadhan</option><option value="10">Syawal</option>
+                <option value="11">Dzulqa'dah</option><option value="12">Dzulhijjah</option>
+              </select>
+            </div>
+          </div>
+          <label for="hYear">Tahun Hijriah</label>
+          <input type="number" id="hYear" placeholder="1447">
+          <button class="btn btn-primary" style="width:100%;justify-content:center" onclick="konversiH2M()">Konversi ke Masehi</button>
+        </div>
+        <div class="disclaimer">Hasil memakai kalender tabular (rata-rata astronomis), sedikit berbeda dari penetapan hisab hakiki wujudul hilal Muhammadiyah atau hasil rukyat. Gunakan untuk perkiraan, bukan penetapan awal bulan Hijriah resmi.</div>
+      </div>
+      <div class="card">
+        <div class="result-box">
+          <div class="hijri-out" id="hijriResult"><span class="d">—</span></div>
+          <div class="cap">Tanggal hasil konversi</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- EDUKASI FALAK -->
+  <div class="panel" id="edukasi">
+    <div class="section-head">
+      <p>Ilmu falak (astronomi Islam) mempelajari pergerakan benda langit untuk kepentingan ibadah: arah kiblat, waktu salat, awal bulan Hijriah, dan gerhana. Enam pokok bahasan berikut jadi dasar sebelum menggunakan kalkulator-kalkulator di situs ini.</p>
+    </div>
+    <div class="edu-grid">
+      <div class="edu-card">
+        <span class="num">§1</span>
+        <h3>Definisi &amp; Cakupan</h3>
+        <p>Ilmu falak menghitung posisi matahari, bulan, dan bumi untuk menentukan arah kiblat, waktu salat, kalender Hijriah, serta awal dan akhir bulan Qamariyah.</p>
+      </div>
+      <div class="edu-card">
+        <span class="num">§2</span>
+        <h3>Hisab &amp; Rukyat</h3>
+        <p>Hisab adalah perhitungan astronomis, rukyat adalah pengamatan langsung hilal. Keduanya saling melengkapi dalam penentuan awal bulan Hijriah.</p>
+      </div>
+      <div class="edu-card">
+        <span class="num">§3</span>
+        <h3>Metode Wujudul Hilal</h3>
+        <p>Muhammadiyah menggunakan kriteria wujudul hilal: awal bulan baru ditetapkan bila pada saat matahari terbenam, hilal telah wujud di atas ufuk, terlepas dari dapat atau tidaknya dilihat.</p>
+      </div>
+      <div class="edu-card">
+        <span class="num">§4</span>
+        <h3>Koordinat Ka'bah</h3>
+        <p>Ka'bah terletak pada 21.4225° Lintang Utara dan 39.8262° Bujur Timur, menjadi titik acuan seluruh perhitungan arah kiblat di dunia.</p>
+      </div>
+      <div class="edu-card">
+        <span class="num">§5</span>
+        <h3>Waktu Salat Astronomis</h3>
+        <p>Setiap waktu salat berkaitan dengan posisi matahari: Subuh &amp; Isya ditentukan sudut matahari di bawah ufuk, Dzuhur saat matahari tepat di meridian, Ashar dari panjang bayangan.</p>
+      </div>
+      <div class="edu-card">
+        <span class="num">§6</span>
+        <h3>Kalender Qamariyah</h3>
+        <p>Kalender Hijriah mengikuti peredaran bulan mengelilingi bumi, dengan satu tahun rata-rata 354–355 hari, lebih pendek sekitar 11 hari dari tahun Masehi.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- PANDUAN ALAT -->
+  <div class="panel" id="panduan">
+    <div class="section-head">
+      <p>Tiga cara umum mengukur arah kiblat secara mandiri, dari yang paling sederhana hingga paling presisi. Pilih metode sesuai alat yang tersedia — kombinasi beberapa metode akan memberi hasil yang paling meyakinkan.</p>
+    </div>
+    <div class="card">
+      <h3 style="font-family:var(--serif);color:var(--hijau-tua);margin-top:0">A. Kompas Magnetik / Aplikasi Kompas Kiblat</h3>
+      <ul class="steps">
+        <li><h4>Jauhkan dari logam dan medan magnet</h4><p>Letakkan kompas atau ponsel jauh dari besi, speaker, dan kabel listrik agar jarum tidak menyimpang.</p></li>
+        <li><h4>Kalibrasi kompas</h4><p>Gerakkan perangkat membentuk angka 8 beberapa kali hingga sensor kompas terkalibrasi.</p></li>
+        <li><h4>Masukkan sudut hasil kalkulator</h4><p>Gunakan sudut kiblat dari menu Arah Kiblat di atas, lalu arahkan tanda kompas ke sudut tersebut dari Utara.</p></li>
+        <li><h4>Koreksi deklinasi magnetik</h4><p>Kompas menunjuk Utara magnetik, bukan Utara sejati. Tambahkan koreksi deklinasi lokasi Anda bila aplikasi belum melakukannya otomatis.</p></li>
+      </ul>
+    </div>
+    <div class="card" style="margin-top:20px">
+      <h3 style="font-family:var(--serif);color:var(--hijau-tua);margin-top:0">B. Tongkat Istiwa (Bayang-Bayang Matahari)</h3>
+      <ul class="steps">
+        <li><h4>Siapkan tongkat lurus &amp; bidang datar</h4><p>Tancapkan tongkat tegak lurus di permukaan rata yang terkena sinar matahari langsung.</p></li>
+        <li><h4>Tunggu waktu rasydul kiblat</h4><p>Pada tanggal tertentu (26–27 Mei dan 15–16 Juli), matahari tepat berada di atas Ka'bah pada jam tertentu waktu setempat.</p></li>
+        <li><h4>Tandai arah bayangan</h4><p>Pada saat itu, garis bayangan tongkat menunjukkan arah kiblat secara langsung dan akurat.</p></li>
+        <li><h4>Buat garis permanen</h4><p>Tandai garis bayangan tersebut sebagai shaf kiblat masjid atau mushola.</p></li>
+      </ul>
+    </div>
+    <div class="card" style="margin-top:20px">
+      <h3 style="font-family:var(--serif);color:var(--hijau-tua);margin-top:0">C. Aplikasi &amp; Theodolite Digital</h3>
+      <ul class="steps">
+        <li><h4>Gunakan aplikasi berbasis GPS</h4><p>Aplikasi seperti Qibla Finder memanfaatkan GPS dan sensor kompas ponsel untuk menampilkan arah kiblat secara real-time.</p></li>
+        <li><h4>Verifikasi dengan matahari atau bintang</h4><p>Untuk pengukuran presisi tinggi (masjid besar), gunakan theodolite yang diarahkan ke matahari pada waktu rasydul kiblat.</p></li>
+        <li><h4>Catat dan dokumentasikan</h4><p>Simpan hasil pengukuran (sudut, tanggal, metode) sebagai referensi bila diperlukan verifikasi ulang di kemudian hari.</p></li>
+      </ul>
+    </div>
+  </div>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <span><b>Falakiyah</b> · Layanan Falak Muhammadiyah</span>
+    <span>Dibuat untuk keperluan pembelajaran ilmu falak</span>
+  </div>
+</footer>
+
+<script>
+/* ---------- NAV / TABS ---------- */
+const TAB_INFO = {
+  kiblat:  { eyebrow:'Kalkulator', judul:'Arah Kiblat',
+    ikon:'<circle cx="14" cy="14" r="11" fill="none" stroke="#D9C08A" stroke-width="1.6"/><line x1="14" y1="14" x2="14" y2="7" stroke="#D9C08A" stroke-width="2" stroke-linecap="round"/><rect x="11.7" y="2.5" width="4.6" height="4.6" rx="0.6" fill="#D9C08A"/><circle cx="14" cy="14" r="1.6" fill="#D9C08A"/>' },
+  salat:   { eyebrow:'Kalkulator', judul:'Waktu Salat',
+    ikon:'<circle cx="14" cy="14" r="11" fill="none" stroke="#D9C08A" stroke-width="1.6"/><path d="M14 8v6l4 3" stroke="#D9C08A" stroke-width="2" stroke-linecap="round" fill="none"/>' },
+  hijriah: { eyebrow:'Konverter', judul:'Kalender Hijriah',
+    ikon:'<path d="M18 6a8 8 0 1 0 4 14.9A9 9 0 0 1 18 6Z" fill="#D9C08A"/>' },
+  edukasi: { eyebrow:'Materi Dasar', judul:'Edukasi Ilmu Falak',
+    ikon:'<rect x="5" y="6" width="18" height="16" rx="2" fill="none" stroke="#D9C08A" stroke-width="1.6"/><line x1="9" y1="11" x2="19" y2="11" stroke="#D9C08A" stroke-width="1.6"/><line x1="9" y1="15" x2="19" y2="15" stroke="#D9C08A" stroke-width="1.6"/><line x1="9" y1="19" x2="15" y2="19" stroke="#D9C08A" stroke-width="1.6"/>' },
+  panduan: { eyebrow:'Tuntunan Praktis', judul:'Panduan Alat Ukur',
+    ikon:'<path d="M5 19a9 9 0 0 1 18 0" fill="none" stroke="#D9C08A" stroke-width="1.6"/><line x1="5" y1="19" x2="23" y2="19" stroke="#D9C08A" stroke-width="1.6" stroke-linecap="round"/><line x1="14" y1="19" x2="14" y2="8" stroke="#D9C08A" stroke-width="1.4" stroke-linecap="round"/><line x1="14" y1="19" x2="20.5" y2="11.5" stroke="#D9C08A" stroke-width="1.4" stroke-linecap="round"/><circle cx="14" cy="19" r="1.4" fill="#D9C08A"/>' }
+};
+function showTab(id){
+  document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  document.querySelectorAll('nav.tabs button').forEach(b=>b.classList.toggle('active', b.dataset.tab===id));
+
+  const hero = document.getElementById('hero');
+  const sub = document.getElementById('subhero');
+  if(id === 'beranda'){
+    hero.style.display = 'block';
+    sub.classList.remove('active');
+  } else {
+    hero.style.display = 'none';
+    const info = TAB_INFO[id];
+    if(info){
+      document.getElementById('subheroIcon').innerHTML = '<svg viewBox="0 0 28 28" fill="none">'+info.ikon+'</svg>';
+      document.getElementById('subheroEyebrow').textContent = info.eyebrow;
+      document.getElementById('subheroTitle').textContent = info.judul;
+    }
+    sub.classList.add('active');
+  }
+  window.scrollTo({top: document.querySelector('header').offsetHeight, behavior:'smooth'});
+}
+document.querySelectorAll('nav.tabs button').forEach(b=>{
+  b.addEventListener('click', ()=>showTab(b.dataset.tab));
+});
+
+/* ---------- ARAH KIBLAT ---------- */
+const KAABA_LAT = 21.4225, KAABA_LNG = 39.8262;
+function isiKota(){
+  const v = document.getElementById('kotaSelect').value;
+  if(!v) return;
+  const [lat,lng] = v.split(',');
+  document.getElementById('lat').value = lat;
+  document.getElementById('lng').value = lng;
+}
+
+/* ---------- Daftar kota (bawaan + tambahan manual dari pengguna) ---------- */
+const KOTA_DEFAULT = [
+  { nama:'Makassar', negara:'Indonesia', lat:-5.1477, lng:119.4327, tz:8 },
+  { nama:'Jakarta', negara:'Indonesia', lat:-6.2088, lng:106.8456, tz:7 },
+  { nama:'Yogyakarta', negara:'Indonesia', lat:-7.7956, lng:110.3695, tz:7 },
+  { nama:'Bandung', negara:'Indonesia', lat:-6.9175, lng:107.6191, tz:7 },
+  { nama:'Surabaya', negara:'Indonesia', lat:-7.2575, lng:112.7521, tz:7 },
+  { nama:'Semarang', negara:'Indonesia', lat:-6.9667, lng:110.4167, tz:7 },
+  { nama:'Medan', negara:'Indonesia', lat:3.5952, lng:98.6722, tz:7 },
+  { nama:'Denpasar', negara:'Indonesia', lat:-8.6705, lng:115.2126, tz:8 },
+  { nama:'Pekanbaru', negara:'Indonesia', lat:0.5333, lng:101.4500, tz:7 },
+  { nama:'Padang', negara:'Indonesia', lat:-0.9471, lng:100.4172, tz:7 },
+  { nama:'Manado', negara:'Indonesia', lat:1.4748, lng:124.8421, tz:8 },
+  { nama:'Banda Aceh', negara:'Indonesia', lat:5.5483, lng:95.3238, tz:7 },
+  { nama:'Palembang', negara:'Indonesia', lat:-2.9761, lng:104.7754, tz:7 },
+  { nama:'Pontianak', negara:'Indonesia', lat:-0.0263, lng:109.3425, tz:7 },
+  { nama:'Balikpapan', negara:'Indonesia', lat:-1.2379, lng:116.8529, tz:8 },
+  { nama:'Banjarmasin', negara:'Indonesia', lat:-3.3186, lng:114.5944, tz:8 },
+  { nama:'Kupang', negara:'Indonesia', lat:-10.1772, lng:123.6070, tz:8 },
+  { nama:'Ambon', negara:'Indonesia', lat:-3.6954, lng:128.1814, tz:9 },
+  { nama:'Jayapura', negara:'Indonesia', lat:-2.5489, lng:140.7197, tz:9 },
+  { nama:'Makkah', negara:'Arab Saudi', lat:21.4225, lng:39.8262, tz:3 },
+  { nama:'Madinah', negara:'Arab Saudi', lat:24.4672, lng:39.6111, tz:3 },
+  { nama:'Riyadh', negara:'Arab Saudi', lat:24.7136, lng:46.6753, tz:3 },
+  { nama:'Kuala Lumpur', negara:'Malaysia', lat:3.1390, lng:101.6869, tz:8 },
+  { nama:'Singapura', negara:'Singapura', lat:1.3521, lng:103.8198, tz:8 },
+  { nama:'Kairo', negara:'Mesir', lat:30.0444, lng:31.2357, tz:2 },
+  { nama:'Istanbul', negara:'Turki', lat:41.0082, lng:28.9784, tz:3 },
+];
+function ambilKotaCustom(){
+  try{ return JSON.parse(localStorage.getItem('falakiyah_kota_custom') || '[]'); }
+  catch(e){ return []; }
+}
+function simpanKotaCustom(daftar){
+  try{ localStorage.setItem('falakiyah_kota_custom', JSON.stringify(daftar)); }catch(e){}
+}
+function semuaKota(){ return KOTA_DEFAULT.concat(ambilKotaCustom()); }
+
+function renderPilihanKota(selectId){
+  const select = document.getElementById(selectId);
+  if(!select) return;
+  const dipilihSebelumnya = select.value;
+  select.innerHTML = '<option value="">— Masukkan koordinat manual —</option>';
+  const kelompok = {};
+  semuaKota().forEach(k=>{
+    if(!kelompok[k.negara]) kelompok[k.negara] = [];
+    kelompok[k.negara].push(k);
+  });
+  Object.keys(kelompok).forEach(negara=>{
+    const grp = document.createElement('optgroup');
+    grp.label = negara;
+    kelompok[negara].forEach(k=>{
+      const opt = document.createElement('option');
+      opt.value = k.lat + ',' + k.lng + ',' + k.tz;
+      opt.textContent = k.nama;
+      grp.appendChild(opt);
+    });
+    select.appendChild(grp);
+  });
+  if(dipilihSebelumnya) select.value = dipilihSebelumnya;
+}
+function toggleTambahKota(prefix){
+  document.getElementById('kotaTambah_'+prefix).classList.toggle('open');
+}
+function simpanKotaBaru(prefix){
+  const nama = document.getElementById('kbNama_'+prefix).value.trim();
+  const negara = document.getElementById('kbNegara_'+prefix).value.trim() || 'Lainnya';
+  const lat = parseFloat(document.getElementById('kbLat_'+prefix).value);
+  const lng = parseFloat(document.getElementById('kbLng_'+prefix).value);
+  const tzInput = document.getElementById('kbTz_'+prefix);
+  let tz = tzInput ? parseFloat(tzInput.value) : NaN;
+  const pesan = document.getElementById('kotaPesan_'+prefix);
+
+  if(!nama){ pesan.textContent = 'Nama kota wajib diisi.'; pesan.className = 'kota-pesan err'; return; }
+  if(isNaN(lat) || lat < -90 || lat > 90){ pesan.textContent = 'Lintang harus berupa angka antara -90 dan 90.'; pesan.className = 'kota-pesan err'; return; }
+  if(isNaN(lng) || lng < -180 || lng > 180){ pesan.textContent = 'Bujur harus berupa angka antara -180 dan 180.'; pesan.className = 'kota-pesan err'; return; }
+  if(isNaN(tz)) tz = Math.round(lng / 15); // perkiraan zona waktu dari bujur bila tidak diisi
+
+  const daftar = ambilKotaCustom();
+  daftar.push({ nama, negara, lat, lng, tz });
+  simpanKotaCustom(daftar);
+
+  renderPilihanKota('kotaSelect');
+  renderPilihanKota('kotaSelect2');
+
+  const selectId = prefix === 'kiblat' ? 'kotaSelect' : 'kotaSelect2';
+  document.getElementById(selectId).value = lat + ',' + lng + ',' + tz;
+  if(prefix === 'kiblat') isiKota(); else isiKota2();
+
+  pesan.textContent = 'Kota "' + nama + '" (' + negara + ') berhasil ditambahkan & tersimpan untuk dipakai lagi nanti.';
+  pesan.className = 'kota-pesan ok';
+  document.getElementById('kbNama_'+prefix).value = '';
+  document.getElementById('kbNegara_'+prefix).value = '';
+  document.getElementById('kbLat_'+prefix).value = '';
+  document.getElementById('kbLng_'+prefix).value = '';
+  if(tzInput) tzInput.value = '';
+}
+renderPilihanKota('kotaSelect');
+renderPilihanKota('kotaSelect2');
+
+function toRad(d){return d*Math.PI/180;}
+function toDeg(r){return r*180/Math.PI;}
+function hitungKiblat(){
+  const lat = parseFloat(document.getElementById('lat').value);
+  const lng = parseFloat(document.getElementById('lng').value);
+  if(isNaN(lat) || isNaN(lng)){
+    document.getElementById('hasilSudut').textContent = '—';
+    document.getElementById('hasilJarak').textContent = 'Masukkan lintang dan bujur terlebih dahulu, atau pilih kota.';
+    return;
+  }
+  const phi1 = toRad(lat), phi2 = toRad(KAABA_LAT);
+  const dLambda = toRad(KAABA_LNG - lng);
+  const y = Math.sin(dLambda) * Math.cos(phi2);
+  const x = Math.cos(phi1)*Math.sin(phi2) - Math.sin(phi1)*Math.cos(phi2)*Math.cos(dLambda);
+  let bearing = (toDeg(Math.atan2(y,x)) + 360) % 360;
+
+  const R = 6371;
+  const dPhi = toRad(KAABA_LAT-lat);
+  const a = Math.sin(dPhi/2)**2 + Math.cos(phi1)*Math.cos(phi2)*Math.sin(dLambda/2)**2;
+  const jarak = R * 2*Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+
+  document.getElementById('hasilSudut').textContent = bearing.toFixed(2) + '°';
+  document.getElementById('hasilJarak').innerHTML = 'Jarak lurus ke Ka\'bah: <b>' + Math.round(jarak).toLocaleString('id-ID') + ' km</b>. Arahkan tanda kompas Anda ke ' + bearing.toFixed(1) + '° dari Utara sejati (searah jarum jam).';
+  document.getElementById('needle').style.transform = 'rotate(' + bearing + 'deg)';
+}
+
+/* ---------- WAKTU SALAT ---------- */
+function isiKota2(){
+  const v = document.getElementById('kotaSelect2').value;
+  if(!v) return;
+  const [lat,lng,tz] = v.split(',');
+  document.getElementById('lat2').value = lat;
+  document.getElementById('lng2').value = lng;
+  document.getElementById('tz2').value = tz;
+}
+function dsin(d){return Math.sin(toRad(d));}
+function dcos(d){return Math.cos(toRad(d));}
+function dtan(d){return Math.tan(toRad(d));}
+function darcsin(x){return toDeg(Math.asin(x));}
+function darccos(x){return toDeg(Math.acos(Math.max(-1,Math.min(1,x))));}
+function darccot(x){return toDeg(Math.atan2(1,x));}
+function darctan2(y,x){return toDeg(Math.atan2(y,x));}
+function fixHour(a){a = a - 24*Math.floor(a/24); return a<0?a+24:a;}
+function fixAngle(a){a = a - 360*Math.floor(a/360); return a<0?a+360:a;}
+
+function julianDate(y,m,d){
+  if(m<=2){y-=1;m+=12;}
+  const A = Math.floor(y/100);
+  const B = 2 - A + Math.floor(A/4);
+  return Math.floor(365.25*(y+4716)) + Math.floor(30.6001*(m+1)) + d + B - 1524.5;
+}
+function sunPosition(jd){
+  const D = jd - 2451545.0;
+  const g = fixAngle(357.529 + 0.98560028*D);
+  const q = fixAngle(280.459 + 0.98564736*D);
+  const L = fixAngle(q + 1.915*dsin(g) + 0.02*dsin(2*g));
+  const e = 23.439 - 0.00000036*D;
+  let RA = darctan2(dcos(e)*dsin(L), dcos(L))/15;
+  RA = fixHour(RA);
+  const eqt = q/15 - RA;
+  const decl = darcsin(dsin(e)*dsin(L));
+  return {declination:decl, equation:eqt};
+}
+function midDay(baseJD, t){
+  const eqt = sunPosition(baseJD+t).equation;
+  return fixHour(12-eqt);
+}
+function sunAngleTime(baseJD, lat, angle, t, ccw){
+  const decl = sunPosition(baseJD+t).declination;
+  const noon = midDay(baseJD, t);
+  const num = -dsin(angle) - dsin(decl)*dsin(lat);
+  const den = dcos(decl)*dcos(lat);
+  const v = Math.max(-1, Math.min(1, num/den));
+  const dt = darccos(v)/15;
+  return noon + (ccw ? -dt : dt);
+}
+function asrTime(baseJD, lat, factor, t){
+  const decl = sunPosition(baseJD+t).declination;
+  const angle = -darccot(factor + dtan(Math.abs(lat-decl)));
+  return sunAngleTime(baseJD, lat, angle, t, false);
+}
+function fmtJam(h){
+  h = fixHour(h);
+  let hh = Math.floor(h);
+  let mm = Math.round((h-hh)*60);
+  if(mm===60){mm=0;hh=(hh+1)%24;}
+  return String(hh).padStart(2,'0') + ':' + String(mm).padStart(2,'0');
+}
+function hitungSalat(){
+  const lat = parseFloat(document.getElementById('lat2').value);
+  const lng = parseFloat(document.getElementById('lng2').value);
+  const tz = parseFloat(document.getElementById('tz2').value);
+  const tglVal = document.getElementById('tgl2').value;
+  if(isNaN(lat)||isNaN(lng)||isNaN(tz)||!tglVal){
+    alert('Lengkapi lintang, bujur, zona waktu, dan tanggal terlebih dahulu.');
+    return;
+  }
+  const [Y,M,D] = tglVal.split('-').map(Number);
+  const baseJD = julianDate(Y,M,D) - lng/(15*24);
+
+  const fajrAngle = 18, ishaAngle = 18, asrFactor = 1;
+  const dhuhr = midDay(baseJD, 12/24);
+  const fajr = sunAngleTime(baseJD, lat, fajrAngle, 5/24, true);
+  const sunrise = sunAngleTime(baseJD, lat, 0.833, 6/24, true);
+  const asr = asrTime(baseJD, lat, asrFactor, 13/24);
+  const maghrib = sunAngleTime(baseJD, lat, 0.833, 18/24, false);
+  const isha = sunAngleTime(baseJD, lat, ishaAngle, 18/24, false);
+
+  const tzAdjust = tz - lng/15;
+  const adj = t => t + tzAdjust;
+
+  document.getElementById('t-imsak').textContent = fmtJam(adj(fajr) - 10/60);
+  document.getElementById('t-fajr').textContent = fmtJam(adj(fajr));
+  document.getElementById('t-sunrise').textContent = fmtJam(adj(sunrise));
+  document.getElementById('t-dhuhr').textContent = fmtJam(adj(dhuhr));
+  document.getElementById('t-asr').textContent = fmtJam(adj(asr));
+  document.getElementById('t-maghrib').textContent = fmtJam(adj(maghrib));
+  document.getElementById('t-isha').textContent = fmtJam(adj(isha));
+}
+
+/* ---------- KALENDER HIJRIAH (tabular / aritmatika) ---------- */
+function setHijriMode(mode){
+  document.getElementById('modeM2H').style.display = mode==='m2h' ? 'block' : 'none';
+  document.getElementById('modeH2M').style.display = mode==='h2m' ? 'block' : 'none';
+  document.getElementById('btnM2H').classList.toggle('on', mode==='m2h');
+  document.getElementById('btnH2M').classList.toggle('on', mode==='h2m');
+}
+const HIJRI_BULAN = ['Muharram','Safar',"Rabiul Awal","Rabiul Akhir","Jumadil Awal","Jumadil Akhir","Rajab","Sya'ban","Ramadhan","Syawal","Dzulqa'dah","Dzulhijjah"];
+
+function gregorianToJDN(y,m,d){
+  const a = Math.floor((14-m)/12);
+  const y2 = y + 4800 - a;
+  const m2 = m + 12*a - 3;
+  return d + Math.floor((153*m2+2)/5) + 365*y2 + Math.floor(y2/4) - Math.floor(y2/100) + Math.floor(y2/400) - 32045;
+}
+function jdnToGregorian(jdn){
+  let a = jdn + 32044;
+  let b = Math.floor((4*a+3)/146097);
+  let c = a - Math.floor((146097*b)/4);
+  let d2 = Math.floor((4*c+3)/1461);
+  let e = c - Math.floor((1461*d2)/4);
+  let m2 = Math.floor((5*e+2)/153);
+  const day = e - Math.floor((153*m2+2)/5) + 1;
+  const month = m2 + 3 - 12*Math.floor(m2/10);
+  const year = 100*b + d2 - 4800 + Math.floor(m2/10);
+  return {year, month, day};
+}
+function islamicToJDN(y,m,d){
+  return d + Math.ceil(29.5*(m-1)) + (y-1)*354 + Math.floor((3+11*y)/30) + 1948440 - 1;
+}
+function jdnToIslamic(jdn){
+  let l = jdn - 1948440 + 10632;
+  const n = Math.floor((l-1)/10631);
+  l = l - 10631*n + 354;
+  const j = (Math.floor((10985-l)/5316))*(Math.floor((50*l)/17719)) + (Math.floor(l/5670))*(Math.floor((43*l)/15238));
+  l = l - (Math.floor((30-j)/15))*(Math.floor((17719*j)/50)) - (Math.floor(j/16))*(Math.floor((15238*j)/43)) + 29;
+  const month = Math.floor((24*l)/709);
+  const day = l - Math.floor((709*month)/24);
+  const year = 30*n + j - 30;
+  return {year, month, day};
+}
+function konversiM2H(){
+  const val = document.getElementById('tglMasehi').value;
+  if(!val){alert('Pilih tanggal Masehi terlebih dahulu.');return;}
+  const [Y,M,D] = val.split('-').map(Number);
+  const jdn = gregorianToJDN(Y,M,D);
+  const h = jdnToIslamic(jdn);
+  document.getElementById('hijriResult').innerHTML = '<span class="d">' + h.day + ' ' + HIJRI_BULAN[h.month-1] + ' ' + h.year + ' H</span>';
+}
+function konversiH2M(){
+  const day = parseInt(document.getElementById('hDay').value);
+  const month = parseInt(document.getElementById('hMonth').value);
+  const year = parseInt(document.getElementById('hYear').value);
+  if(!day || !year){alert('Lengkapi tanggal Hijriah terlebih dahulu.');return;}
+  const jdn = islamicToJDN(year, month, day);
+  const g = jdnToGregorian(jdn);
+  const namaBulan = ['Januari','Februari','Maret','April','Mei','Juni','Juli','Agustus','September','Oktober','November','Desember'];
+  document.getElementById('hijriResult').innerHTML = '<span class="d">' + g.day + ' ' + namaBulan[g.month-1] + ' ' + g.year + ' M</span>';
+}
+
+/* default tanggal hari ini */
+(function(){
+  const today = new Date();
+  const iso = today.toISOString().slice(0,10);
+  document.getElementById('tgl2').value = iso;
+  document.getElementById('tglMasehi').value = iso;
+})();
+</script>
+<!-- ASISTEN FALAK -->
+<button class="chat-fab" id="chatFab" aria-label="Buka Asisten Falak" onclick="toggleChat()">
+  <span class="dot"></span>
+  <svg viewBox="0 0 24 24" fill="none"><path d="M4 5h16v11H8l-4 4V5Z" stroke="#D9C08A" stroke-width="1.8" stroke-linejoin="round"/><circle cx="9" cy="10.5" r="1" fill="#D9C08A"/><circle cx="12" cy="10.5" r="1" fill="#D9C08A"/><circle cx="15" cy="10.5" r="1" fill="#D9C08A"/></svg>
+</button>
+
+<div class="chat-panel" id="chatPanel">
+  <div class="chat-head">
+    <svg viewBox="0 0 60 60" fill="none"><circle cx="30" cy="30" r="29" fill="#00693E"/><path fill="#FFFFFF" d="M27.9 15.1 L30.0 3.0 L32.1 15.1 Z M35.6 16.1 L43.5 6.6 L39.2 18.2 Z M41.8 20.8 L53.4 16.5 L43.9 24.4 Z M44.9 27.9 L57.0 30.0 L44.9 32.1 Z M43.9 35.6 L53.4 43.5 L41.8 39.2 Z M39.2 41.8 L43.5 53.4 L35.6 43.9 Z M32.1 44.9 L30.0 57.0 L27.9 44.9 Z M24.4 43.9 L16.5 53.4 L20.8 41.8 Z M18.2 39.2 L6.6 43.5 L16.1 35.6 Z M15.1 32.1 L3.0 30.0 L15.1 27.9 Z M16.1 24.4 L6.6 16.5 L18.2 20.8 Z M20.8 18.2 L16.5 6.6 L24.4 16.1 Z"/><circle cx="30" cy="30" r="12" fill="#00693E" stroke="#FFFFFF" stroke-width="1.6"/></svg>
+    <span class="ttl"><b>Asisten Falakiyah</b><span>Tanya seputar ilmu falak</span></span>
+    <button onclick="toggleSettings()" aria-label="Pengaturan Ollama" title="Pengaturan AI">⚙</button>
+    <button onclick="toggleChat()" aria-label="Tutup">✕</button>
+  </div>
+  <div class="chat-settings" id="chatSettings">
+    <div class="row"><label for="olAktif">Gunakan Ollama (AI lokal)</label>
+      <input type="checkbox" id="olAktif"></div>
+    <label for="olUrl">Alamat server Ollama</label>
+    <input type="text" id="olUrl" value="http://localhost:11434">
+    <label for="olModel">Nama model</label>
+    <input type="text" id="olModel" value="llama3.2">
+    <button class="simpan" onclick="simpanPengaturanOllama()">Simpan &amp; Cek Koneksi</button>
+    <div class="stat" id="olStatus">Belum diaktifkan — memakai basis pengetahuan lokal.</div>
+  </div>
+  <div class="chat-messages" id="chatMessages"></div>
+  <div class="chat-suggest" id="chatSuggest"></div>
+  <div class="chat-input-row">
+    <input type="text" id="chatInput" placeholder="Ketik pertanyaan..." onkeydown="if(event.key==='Enter')kirimChat()">
+    <button onclick="kirimChat()">Kirim</button>
+  </div>
+</div>
+
+<script>
+/* ---------- ASISTEN FALAK: Ollama (opsional, lokal) + basis pengetahuan lokal (fallback) ---------- */
+let OLLAMA = { aktif:false, url:'http://localhost:11434', model:'llama3.2' };
+
+const SISTEM_PROMPT = "Kamu adalah Asisten Falakiyah, asisten AI ramah di website layanan falak Muhammadiyah bernama Falakiyah. Website ini punya 5 fitur: (1) Arah Kiblat - kalkulator sudut kiblat dari koordinat ke Ka'bah (21.4225 LU, 39.8262 BT), (2) Waktu Salat - estimasi jadwal salat dari posisi matahari, (3) Kalender Hijriah - konversi Masehi ke Hijriah pakai kalender tabular, (4) Edukasi Falak - materi dasar ilmu falak, hisab-rukyat, wujudul hilal (kriteria Muhammadiyah), (5) Panduan Alat - cara pakai kompas, tongkat istiwa, theodolite. Jawab pertanyaan pengguna sejelas dan sesingkat mungkin dalam Bahasa Indonesia, boleh menjawab topik apa saja secara umum, tapi utamakan konteks ilmu falak dan arahkan ke fitur situs yang relevan bila cocok.";
+
+const BASIS_PENGETAHUAN = [
+  { kw:['apa itu falak','ilmu falak','definisi falak','pengertian falak','astronomi islam'],
+    jawab:"Ilmu falak adalah cabang astronomi Islam yang mempelajari pergerakan matahari, bulan, dan bumi untuk kepentingan ibadah: menentukan arah kiblat, waktu salat, kalender Hijriah, serta awal-akhir bulan Qamariyah. Selengkapnya ada di tab 'Edukasi Falak' paragraf 1." },
+  { kw:['kiblat','arah kiblat','menghitung kiblat','sudut kiblat','cara hitung kiblat','kearah mana kiblat'],
+    jawab:"Arah kiblat dihitung memakai rumus bearing lingkaran besar dari lokasi Anda menuju Ka'bah (21.4225 LU, 39.8262 BT). Buka tab 'Arah Kiblat', pilih kota atau masukkan koordinat, lalu klik 'Hitung Arah Kiblat' - hasilnya berupa derajat dari Utara sejati." },
+  { kw:['koordinat kabah','lokasi kabah','letak kabah',"ka'bah",'dimana kabah'],
+    jawab:"Ka'bah terletak pada koordinat 21.4225 Lintang Utara dan 39.8262 Bujur Timur di Kota Makkah, Arab Saudi. Titik ini jadi acuan seluruh perhitungan arah kiblat di dunia." },
+  { kw:['waktu salat','jadwal salat','subuh','dzuhur','ashar','maghrib','isya','imsak','sholat','shalat'],
+    jawab:"Waktu salat dihitung dari posisi matahari terhadap lintang & bujur lokasi. Buka tab 'Waktu Salat', isi koordinat/kota, zona waktu, dan tanggal, lalu klik 'Hitung Waktu Salat'. Catatan: hasilnya perkiraan untuk pembelajaran, bukan pengganti jadwal resmi Muhammadiyah/Kemenag." },
+  { kw:['hijriah','kalender hijriah','konversi tanggal','masehi ke hijriah','hijriah ke masehi','tahun baru islam','kalender islam','penanggalan islam'],
+    jawab:"Tab 'Kalender Hijriah' bisa mengonversi dua arah: Masehi ke Hijriah atau sebaliknya, memakai algoritma kalender tabular. Kalender ini dimulai sejak hijrah Nabi Muhammad SAW tahun 622 M. Hasilnya perkiraan astronomis, bisa sedikit berbeda dari penetapan resmi hisab wujudul hilal atau rukyat." },
+  { kw:['hisab','rukyat','hisab dan rukyat','perbedaan hisab rukyat'],
+    jawab:"Hisab adalah perhitungan astronomis posisi bulan/matahari, sedangkan rukyat adalah pengamatan hilal secara langsung di lapangan. Keduanya saling melengkapi dalam menentukan awal bulan Hijriah." },
+  { kw:['wujudul hilal','metode muhammadiyah','kriteria muhammadiyah','hilal','kriteria wujudul hilal'],
+    jawab:"Muhammadiyah menggunakan kriteria wujudul hilal: awal bulan Hijriah ditetapkan bila pada saat matahari terbenam, hilal sudah wujud (berada) di atas ufuk - terlepas dari dapat dilihat atau tidak secara kasat mata." },
+  { kw:['imkanur rukyat','kriteria mabims','visibilitas hilal'],
+    jawab:"Imkanur rukyat (visibilitas hilal) adalah kriteria ketinggian & elongasi minimum hilal supaya berpeluang terlihat, dipakai sebagian lembaga seperti Kemenag/MABIMS. Ini berbeda dengan kriteria wujudul hilal Muhammadiyah yang hanya mensyaratkan hilal sudah berada di atas ufuk saat matahari terbenam." },
+  { kw:['gerhana matahari','gerhana bulan','gerhana'],
+    jawab:"Gerhana terjadi karena posisi matahari, bumi, dan bulan segaris pada bidang orbit yang hampir sejajar. Gerhana matahari terjadi saat bulan berada di antara matahari dan bumi (saat ijtimak), gerhana bulan terjadi saat bumi berada di antara matahari dan bulan (saat purnama). Ilmu falak dipakai untuk memprediksi waktu dan wilayah yang bisa menyaksikannya." },
+  { kw:['ijtimak','konjungsi','new moon','bulan baru astronomis'],
+    jawab:"Ijtimak (konjungsi) adalah saat bulan dan matahari berada pada bujur ekliptika yang sama dilihat dari bumi - awal siklus bulan baru secara astronomis. Ijtimak sendiri belum tentu menandai masuknya bulan Hijriah baru; itu tergantung kriteria hisab/rukyat yang dipakai." },
+  { kw:['tongkat istiwa','rasydul kiblat','bayangan matahari','istiwa'],
+    jawab:"Tongkat istiwa memanfaatkan bayangan matahari. Pada momen rasydul kiblat (sekitar 26-27 Mei & 15-16 Juli), matahari tepat berada di atas Ka'bah, sehingga bayangan tongkat lurus menunjukkan arah kiblat. Detail langkahnya ada di tab 'Panduan Alat' bagian B." },
+  { kw:['kompas','aplikasi kompas','deklinasi magnetik','kalibrasi kompas'],
+    jawab:"Untuk kompas magnetik/aplikasi ponsel: jauhkan dari logam, kalibrasi dengan gerakan angka 8, lalu arahkan ke sudut hasil kalkulator 'Arah Kiblat'. Ingat, kompas menunjuk Utara magnetik - perlu koreksi deklinasi agar akurat. Detail di tab 'Panduan Alat' bagian A." },
+  { kw:['theodolite','gps kiblat','qibla finder'],
+    jawab:"Theodolite digital dan aplikasi GPS (seperti Qibla Finder) memberi presisi tinggi, cocok untuk pengukuran arah kiblat masjid besar. Sebaiknya diverifikasi ulang dengan metode matahari pada waktu rasydul kiblat. Lihat tab 'Panduan Alat' bagian C." },
+  { kw:['equation of time','perata waktu','persamaan waktu'],
+    jawab:"Equation of time (perata waktu) adalah selisih antara waktu matahari hakiki (posisi matahari sesungguhnya) dan waktu matahari rata-rata (yang dipakai jam biasa), akibat orbit bumi yang elips dan kemiringan sumbu bumi. Nilainya dipakai dalam perhitungan waktu salat dan rasydul kiblat agar akurat." },
+  { kw:['deklinasi matahari','deklinasi'],
+    jawab:"Deklinasi matahari adalah sudut posisi matahari di utara/selatan garis khatulistiwa langit, berubah sepanjang tahun antara sekitar -23,5 derajat hingga +23,5 derajat. Nilai ini jadi salah satu variabel utama dalam menghitung waktu salat dan arah kiblat." },
+  { kw:['lintang','bujur','koordinat geografis','latitude','longitude'],
+    jawab:"Lintang (latitude) mengukur posisi utara-selatan suatu tempat dari garis khatulistiwa (0 derajat), sedangkan bujur (longitude) mengukur posisi timur-barat dari Greenwich (0 derajat). Kedua nilai ini dibutuhkan untuk menghitung arah kiblat dan waktu salat lokasi mana pun." },
+  { kw:['zona waktu','wib','wita','wit','gmt','utc'],
+    jawab:"Indonesia punya 3 zona waktu: WIB (UTC+7), WITA (UTC+8), dan WIT (UTC+9). Zona waktu ini dipakai kalkulator 'Waktu Salat' untuk mengoreksi hasil perhitungan matahari ke jam lokal yang biasa dipakai." },
+  { kw:['cara pakai web','fitur web','menu web','panduan situs','apa saja fitur','situs ini'],
+    jawab:"Situs ini punya 5 layanan: Arah Kiblat (kalkulator sudut), Waktu Salat (estimasi jadwal), Kalender Hijriah (konversi tanggal), Edukasi Falak (materi dasar), dan Panduan Alat (cara pakai kompas/tongkat istiwa/theodolite). Semua bisa diakses lewat menu navigasi di atas." },
+  { kw:['siapa kamu','kamu siapa','asisten ini apa','ai apa','nama kamu'],
+    jawab:"Saya Asisten Falakiyah - asisten tanya-jawab seputar ilmu falak di situs ini. Kalau AI lokal Ollama diaktifkan (lihat ikon gerigi di atas), saya bisa menjawab lebih bebas; kalau tidak, saya menjawab dari basis pengetahuan yang sudah disiapkan di situs ini." },
+  { kw:['muhammadiyah','sejarah muhammadiyah','organisasi muhammadiyah'],
+    jawab:"Muhammadiyah adalah organisasi Islam di Indonesia yang didirikan KH Ahmad Dahlan pada 1912, dikenal aktif di bidang pendidikan, kesehatan, sosial, dan dakwah - termasuk pengembangan ilmu falak lewat Majelis Tarjih dan Tajdid untuk penentuan arah kiblat, waktu salat, serta awal bulan Hijriah secara hisab." },
+];
+const CHIPS_DEFAULT = ["Apa itu ilmu falak?","Bagaimana cara hitung arah kiblat?","Apa itu wujudul hilal?","Apa itu gerhana?"];
+
+function tambahPesan(teks, dari){
+  const box = document.getElementById('chatMessages');
+  const div = document.createElement('div');
+  div.className = 'msg ' + (dari==='user' ? 'user' : 'bot');
+  div.textContent = teks;
+  box.appendChild(div);
+  box.scrollTop = box.scrollHeight;
+  return div;
+}
+function tampilkanChip(list){
+  const wrap = document.getElementById('chatSuggest');
+  wrap.innerHTML = '';
+  list.forEach(q=>{
+    const c = document.createElement('button');
+    c.className = 'chip';
+    c.textContent = q;
+    c.onclick = ()=>{ document.getElementById('chatInput').value = q; kirimChat(); };
+    wrap.appendChild(c);
+  });
+}
+const STOPWORDS = new Set(['apa','itu','yang','di','ke','dari','untuk','dan','atau','bagaimana','cara','saya','ini','adalah','pada','dengan','bisa','ada','kah','tolong','coba']);
+
+/* Jarak Levenshtein - dipakai untuk toleransi typo saat mencocokkan kata */
+function jarakLevenshtein(a, b){
+  const m = a.length, n = b.length;
+  if(m===0) return n;
+  if(n===0) return m;
+  const dp = Array.from({length:m+1}, ()=> new Array(n+1).fill(0));
+  for(let i=0;i<=m;i++) dp[i][0]=i;
+  for(let j=0;j<=n;j++) dp[0][j]=j;
+  for(let i=1;i<=m;i++){
+    for(let j=1;j<=n;j++){
+      const biaya = a[i-1]===b[j-1] ? 0 : 1;
+      dp[i][j] = Math.min(
+        dp[i-1][j] + 1,      // hapus
+        dp[i][j-1] + 1,      // tambah
+        dp[i-1][j-1] + biaya // ganti
+      );
+    }
+  }
+  return dp[m][n];
+}
+/* Toleransi typo makin longgar untuk kata yang lebih panjang */
+function toleransiTypo(panjang){
+  if(panjang <= 3) return 0;  // kata pendek harus persis, biar tidak salah tangkap
+  if(panjang <= 5) return 1;
+  return 2;
+}
+function kataMirip(kataUser, kataKw){
+  if(kataUser === kataKw) return true;
+  if(Math.abs(kataUser.length - kataKw.length) > 2) return false;
+  return jarakLevenshtein(kataUser, kataKw) <= toleransiTypo(kataKw.length);
+}
+function bersihkanTeks(teks){
+  return teks.toLowerCase().replace(/[^a-z0-9\s]/g,' ').replace(/\s+/g,' ').trim();
+}
+
+function carikJawaban(pertanyaan){
+  const teks = bersihkanTeks(pertanyaan);
+  const kataUser = teks.split(' ').filter(w=>!STOPWORDS.has(w) && w.length>2);
+  let terbaik = null, skorTerbaik = 0;
+
+  BASIS_PENGETAHUAN.forEach(entri=>{
+    let skor = 0;
+    entri.kw.forEach(k=>{
+      const kataKw = k.split(' ');
+
+      // Kecocokan frasa persis (bobot tertinggi)
+      if(teks.includes(k)) skor += kataKw.length * 2;
+
+      // Kecocokan per kata, termasuk toleransi typo
+      let jumlahCocok = 0;
+      kataKw.forEach(kw=>{
+        const cocok = kataUser.some(uw => kataMirip(uw, kw));
+        if(cocok){ skor += 1; jumlahCocok++; }
+      });
+      // Bonus jika seluruh kata dalam frasa multi-kata cocok (walau typo)
+      if(kataKw.length > 1 && jumlahCocok === kataKw.length) skor += 1;
+    });
+    if(skor > skorTerbaik){ skorTerbaik = skor; terbaik = entri; }
+  });
+
+  if(terbaik && skorTerbaik>0) return terbaik.jawab;
+  return "Maaf, saya belum punya jawaban pasti untuk itu di basis pengetahuan lokal situs ini. Coba tanyakan seputar arah kiblat, waktu salat, kalender Hijriah, hisab-rukyat, wujudul hilal, gerhana, atau alat ukur kiblat - atau aktifkan Ollama (ikon gerigi) untuk jawaban yang lebih bebas.";
+}
+
+/* ---------- Integrasi Ollama (AI lokal, opsional) ---------- */
+let riwayatOllama = [];
+async function tanyaOllama(pertanyaan){
+  const res = await fetch(OLLAMA.url.replace(/\/$/,'') + '/api/chat', {
+    method:'POST',
+    headers:{'Content-Type':'application/json'},
+    body: JSON.stringify({
+      model: OLLAMA.model,
+      messages: [{role:'system', content: SISTEM_PROMPT}, ...riwayatOllama, {role:'user', content: pertanyaan}],
+      stream:false
+    })
+  });
+  if(!res.ok) throw new Error('Ollama merespons error');
+  const data = await res.json();
+  const jawaban = data.message && data.message.content ? data.message.content : null;
+  if(!jawaban) throw new Error('Format respons Ollama tidak dikenali');
+  riwayatOllama.push({role:'user', content:pertanyaan});
+  riwayatOllama.push({role:'assistant', content:jawaban});
+  return jawaban;
+}
+function toggleSettings(){
+  document.getElementById('chatSettings').classList.toggle('open');
+}
+async function simpanPengaturanOllama(){
+  OLLAMA.aktif = document.getElementById('olAktif').checked;
+  OLLAMA.url = document.getElementById('olUrl').value.trim() || 'http://localhost:11434';
+  OLLAMA.model = document.getElementById('olModel').value.trim() || 'llama3.2';
+  const status = document.getElementById('olStatus');
+  if(!OLLAMA.aktif){
+    status.textContent = 'Nonaktif - memakai basis pengetahuan lokal.';
+    status.className = 'stat';
+    return;
+  }
+  status.textContent = 'Mengecek koneksi ke ' + OLLAMA.url + ' ...';
+  status.className = 'stat';
+  try{
+    const res = await fetch(OLLAMA.url.replace(/\/$/,'') + '/api/tags');
+    if(!res.ok) throw new Error();
+    status.textContent = 'Terhubung ke Ollama (' + OLLAMA.model + ').';
+    status.className = 'stat ok';
+  }catch(e){
+    status.textContent = 'Tidak terhubung. Pastikan Ollama berjalan (ollama serve) & CORS diizinkan (OLLAMA_ORIGINS=*). Sementara memakai basis pengetahuan lokal.';
+    status.className = 'stat off';
+  }
+}
+async function kirimChat(){
+  const input = document.getElementById('chatInput');
+  const teks = input.value.trim();
+  if(!teks) return;
+  tambahPesan(teks, 'user');
+  input.value = '';
+  const bubbleTunggu = tambahPesan('Mengetik...', 'bot');
+  if(OLLAMA.aktif){
+    try{
+      const jawaban = await tanyaOllama(teks);
+      bubbleTunggu.textContent = jawaban;
+    }catch(e){
+      bubbleTunggu.textContent = carikJawaban(teks) + ' (Catatan: Ollama tidak terjangkau, jawaban di atas dari basis pengetahuan lokal.)';
+    }
+  } else {
+    setTimeout(()=>{ bubbleTunggu.textContent = carikJawaban(teks); }, 300);
+  }
+  document.getElementById('chatMessages').scrollTop = document.getElementById('chatMessages').scrollHeight;
+}
+function toggleChat(){
+  const panel = document.getElementById('chatPanel');
+  panel.classList.toggle('open');
+  if(panel.classList.contains('open') && document.getElementById('chatMessages').children.length===0){
+    tambahPesan("Assalamu'alaikum! Saya Asisten Falakiyah. Ada yang mau ditanyakan seputar ilmu falak, arah kiblat, waktu salat, atau kalender Hijriah? (Tips: aktifkan Ollama lewat ikon gerigi di atas untuk jawaban yang lebih bebas.)", 'bot');
+    tampilkanChip(CHIPS_DEFAULT);
+  }
+}
+</script>
+</body>
+</html>
